@@ -583,5 +583,41 @@ namespace dxvk::hud {
 
     return position;
   }
+  
+ 
+    HudCurrentTime::HudCurrentTime(const Rc<DxvkDevice>& device)
+  : m_device(device) {
+
+  }
+
+
+  HudCurrentTime::~HudCurrentTime() {
+
+  }
+
+ 
+  void HudCurrentTime::update(dxvk::high_resolution_clock::time_point time) {
+
+	  using sc = std::chrono::system_clock;
+    std::time_t t = sc::to_time_t(sc::now());
+    char buf[20];
+    strftime(buf, 20, "%H:%M", localtime(&t));
+    ctime = buf;
+    
+  }
+
+
+  HudPos HudCurrentTime::render(
+          HudRenderer&      renderer,
+          HudPos            position) {
+    position.y += 16.0f;
+    
+    renderer.drawText(16.0f,
+      { position.x, position.y },
+      { 0.25f, 0.5f, 0.25f, 1.0f },
+      ctime);
+
+    return position;
+  }
 
 }
