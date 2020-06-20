@@ -398,5 +398,33 @@ namespace dxvk::hud {
       = dxvk::high_resolution_clock::now();
 
   };
+  
+  /**
+   * \brief HUD item to display current time
+   */
+  class HudCurrentTime : public HudItem {
+    constexpr static int64_t UpdateInterval = 500'000;
+  public:
+  
+    HudCurrentTime(const Rc<DxvkDevice>& device);
+
+    ~HudCurrentTime();
+
+    void update(dxvk::high_resolution_clock::time_point time);
+
+    HudPos render(
+            HudRenderer&      renderer,
+            HudPos            position);
+
+  private:
+
+    Rc<DxvkDevice> m_device;
+
+    std::string ctime;
+
+    dxvk::high_resolution_clock::time_point m_lastUpdate
+      = dxvk::high_resolution_clock::now();
+
+  };
 
 }
