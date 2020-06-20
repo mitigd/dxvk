@@ -39,6 +39,7 @@ namespace dxvk::hud {
     addItem<HudMemoryStatsItem>("memory", -1, device);
     addItem<HudGpuLoadItem>("gpuload", -1, device);
     addItem<HudCompilerActivityItem>("compiler", -1, device);
+    addItem<HudCurrentTime>("time", -1, device);
   }
   
   
